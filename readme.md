@@ -125,13 +125,6 @@ Interactive docs at: `http://127.0.0.1:8000/docs`
 - Environment variable management
 - Auto-generated API documentation with Swagger UI
 
-## Coming Soon
-
-- Transactions (add/view/delete income and expenses)
-- Categories (food, rent, salary, etc.)
-- Budget tracking per category
-- Summary endpoint (monthly totals and breakdowns)
-- Deployment to Railway/Render (live URL)
 
 **MIT License**
 
