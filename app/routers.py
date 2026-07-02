@@ -34,3 +34,21 @@ def login(user: schemas.UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Incorrect password")
     token = create_access_token(data={"sub": db_user.email})
     return {"access_token": token, "token_type": "bearer"}
+
+@router.post("/transactions", response_model=schemas.TransactionResponse)
+def create_transaction(transaction: schemas.TransactionCreate, db: Session = Depends(get_db)):
+    new_transaction = models.Transaction(
+        amount=transaction.amount,
+        description=transaction.description,
+        type=transaction.type,
+        user_id=1
+    )
+    db.add(new_transaction)
+    db.commit()
+    db.refresh(new_transaction)
+    return new_transaction
+
+@router.get("/transactions", response_model=list[schemas.TransactionResponse])
+def get_transactions(db: Session = Depends(get_db)):
+    transactions = db.query(models.Transaction).all()
+    return transactions
