@@ -19,7 +19,7 @@ finance-tracker/
 │   ├── __init__.py
 │   ├── main.py        # App entry point, connects everything
 │   ├── database.py    # Database connection setup
-│   ├── models.py      # Database table definitions
+│   ├── models.py      # Database table definitions (User, Transaction)
 │   ├── schemas.py     # Request/response data shapes
 │   ├── routers.py     # API endpoint logic
 │   └── auth.py        # Password hashing and JWT tokens
@@ -77,7 +77,14 @@ Interactive docs at: `http://127.0.0.1:8000/docs`
 | POST | `/register` | Register a new user | No |
 | POST | `/login` | Login and receive JWT token | No |
 
-### Request & Response Examples
+### Transactions
+
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| POST | `/transactions` | Add a new transaction | No (coming soon) |
+| GET | `/transactions` | Get all transactions | No (coming soon) |
+
+## Request & Response Examples
 
 **POST /register**
 ```json
@@ -109,6 +116,59 @@ Interactive docs at: `http://127.0.0.1:8000/docs`
 }
 ```
 
+**POST /transactions**
+```json
+// Request
+{
+  "amount": 500.0,
+  "description": "Grocery shopping",
+  "type": "expense"
+}
+
+// Response
+{
+  "id": 1,
+  "amount": 500.0,
+  "description": "Grocery shopping",
+  "type": "expense",
+  "date": "2026-06-28T10:00:00"
+}
+```
+
+**GET /transactions**
+```json
+// Response
+[
+  {
+    "id": 1,
+    "amount": 500.0,
+    "description": "Grocery shopping",
+    "type": "expense",
+    "date": "2026-06-28T10:00:00"
+  }
+]
+```
+
+## Database Schema
+
+### Users Table
+| Column | Type | Description |
+|--------|------|-------------|
+| id | Integer | Primary key, auto-increment |
+| email | String | Unique user email |
+| password | String | Bcrypt hashed password |
+| created_at | DateTime | Account creation time |
+
+### Transactions Table
+| Column | Type | Description |
+|--------|------|-------------|
+| id | Integer | Primary key, auto-increment |
+| amount | Float | Transaction amount |
+| description | String | What the transaction was for |
+| type | String | "income" or "expense" |
+| date | DateTime | When the transaction occurred |
+| user_id | Integer | Foreign key linking to users table |
+
 ## Security
 
 - Passwords are hashed using **bcrypt** before storing
@@ -119,35 +179,25 @@ Interactive docs at: `http://127.0.0.1:8000/docs`
 
 - REST API design (GET, POST, PUT, DELETE)
 - Database modeling with SQLAlchemy ORM
+- Table relationships with Foreign Keys
 - Data validation with Pydantic schemas
 - JWT-based authentication flow
 - Password hashing and security best practices
 - Environment variable management
 - Auto-generated API documentation with Swagger UI
 
+## Coming Soon
 
-**MIT License**
-
-Copyright (c) 2026 Rupendra Dhungana
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+- Protected routes (JWT required for transactions)
+- Categories (food, rent, salary, etc.)
+- Budget tracking per category
+- Summary endpoint (monthly totals and breakdowns)
+- Deployment to Railway/Render (live URL)
 
 ## Author
 
-Rupendra Dhungana  
+Rupendra Dhungana
+
+---
+
+**MIT License** — Copyright (c) 2026 Rupendra Dhungana
