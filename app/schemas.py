@@ -1,5 +1,7 @@
-from pydantic import BaseModel
 from datetime import datetime
+from typing import Literal
+
+from pydantic import BaseModel, Field
 
 class UserCreate(BaseModel):
     email: str
@@ -13,9 +15,9 @@ class UserResponse(BaseModel):
         from_attributes = True
 
 class TransactionCreate(BaseModel):
-    amount: float
-    description: str
-    type: str
+    amount: float = Field(gt=0)
+    description: str = Field(min_length=1, pattern=r"\S")
+    type: Literal["income", "expense"]
 
 class TransactionResponse(BaseModel):
     id: int
