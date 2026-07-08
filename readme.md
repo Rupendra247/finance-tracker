@@ -186,14 +186,6 @@ Interactive docs at: `http://127.0.0.1:8000/docs`
 - Environment variable management
 - Auto-generated API documentation with Swagger UI
 
-## Coming Soon
-
-- Protected routes (JWT required for transactions)
-- Categories (food, rent, salary, etc.)
-- Budget tracking per category
-- Summary endpoint (monthly totals and breakdowns)
-- Deployment to Railway/Render (live URL)
-
 ## Author
 
 Rupendra Dhungana
