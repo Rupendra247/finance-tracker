@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app import models, schemas
-from app.auth import hash_password, verify_password, create_access_token
+from app.auth import hash_password, verify_password, create_access_token, get_current_user
 
 router = APIRouter()
 
@@ -36,12 +36,12 @@ def login(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return {"access_token": token, "token_type": "bearer"}
 
 @router.post("/transactions", response_model=schemas.TransactionResponse)
-def create_transaction(transaction: schemas.TransactionCreate, db: Session = Depends(get_db)):
+def create_transaction(transaction: schemas.TransactionCreate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     new_transaction = models.Transaction(
         amount=transaction.amount,
         description=transaction.description,
         type=transaction.type,
-        user_id=1
+        user_id= current_user.id
     )
     db.add(new_transaction)
     db.commit()
