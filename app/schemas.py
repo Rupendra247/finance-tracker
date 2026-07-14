@@ -28,3 +28,8 @@ class TransactionResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class SummaryResponse(BaseModel):
+    total_income : float
+    total_expense : float
+    balance : float
