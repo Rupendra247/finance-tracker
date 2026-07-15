@@ -27,7 +27,8 @@ finance-tracker/
 ├── .gitignore
 ├── finance.db         # SQLite database file (auto-created)
 └── README.md
-└── requirement.txt
+└── requirements.txt
+
 ```
 
 ## Setup Instructions
