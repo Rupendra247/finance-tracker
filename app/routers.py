@@ -53,3 +53,21 @@ def create_transaction(transaction: schemas.TransactionCreate, db: Session = Dep
 def get_transactions(db: Session = Depends(get_db)):
     transactions = db.query(models.Transaction).all()
     return transactions
+
+
+@router.get("/summary")
+def get_summary(db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+    transactions = db.query(models.Transaction).filter(models.Transaction.user_id == current_user.id ).all()
+    total_income = 0.0
+    total_expense = 0.0
+    for item in transactions:
+        if item.type == "income":
+            total_income = total_income + item.amount
+        if item.type == "expense":
+            total_expense = total_expense + item.amount
+    balance = total_income - total_expense
+
+    return schemas.SummaryResponse(total_expense = total_expense, total_income = total_income , balance = balance)
+
+
+
