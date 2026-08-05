@@ -188,9 +188,8 @@ Interactive docs at: `http://127.0.0.1:8000/docs`
 - Environment variable management
 - Auto-generated API documentation with Swagger UI
 
-## Author
 
-Rupendra Dhungana
+
 
 ---
 
