@@ -192,6 +192,6 @@ Interactive docs at: `http://127.0.0.1:8000/docs`
 
 Rupendra Dhungana
 
----
+
 
 **MIT License** — Copyright (c) 2026 Rupendra Dhungana
