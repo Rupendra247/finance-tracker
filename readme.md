@@ -58,6 +58,18 @@ finance-tracker/
 ├── pytest.ini                  # Pytest configuration
 ├── LICENSE                     # MIT License
 └── README.md                   # This file
+│   ├── main.py        # App entry point, connects everything
+│   ├── database.py    # Database connection setup
+│   ├── models.py      # Database table definitions (User, Transaction)
+│   ├── schemas.py     # Request/response data shapes
+│   ├── routers.py     # API endpoint logic
+│   └── auth.py        # Password hashing and JWT tokens
+├── .env               # Secret keys (never commit this)
+├── .gitignore
+├── finance.db         # SQLite database file (auto-created)
+└── README.md
+└── requirements.txt
+
 ```
 
 ---
