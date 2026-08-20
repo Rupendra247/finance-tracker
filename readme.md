@@ -305,7 +305,6 @@ Response (HTTP 200):
 ```
 
 ### Update a transaction
-
 ```bash
 curl -X PUT http://127.0.0.1:8000/transactions/1 \
   -H "Authorization: Bearer <token>" \
@@ -314,7 +313,6 @@ curl -X PUT http://127.0.0.1:8000/transactions/1 \
 ```
 
 ### Delete a transaction
-
 ```bash
 curl -X DELETE http://127.0.0.1:8000/transactions/1 \
   -H "Authorization: Bearer <token>"
